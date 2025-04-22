@@ -1,2 +1,47 @@
 @import "tailwindcss";
 @import "tailwindcss/preflight" @tailwind utilities;
+
+body {
+  font-family: "General Sans", sans-serif;
+  width: 100dvw;
+  background-color: #dfdff0;
+  overflow-x: hidden;
+}
+
+@theme {
+  --font-zentry: "zentry", sans-serif;
+  --font-general: "general", sans-serif;
+  --font-circularWeb: "circular-web", sans-serif;
+  --font-robertMedium: "robert-medium", sans-serif;
+  --font-robertRegular: "robert-regular", sans-serif;
+}
+
+@font-face {
+  font-family: "zentry";
+  src: url("/fonts/zentry-regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "general";
+  src: url("/fonts/general.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "circular-web";
+  src: url("/fonts/circularweb-book.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "robert-medium";
+  src: url("/fonts/robert-medium.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "robert-regular";
+  src: url("/fonts/robert-regular.woff2") format("woff2");
+  font-display: swap;
+}
