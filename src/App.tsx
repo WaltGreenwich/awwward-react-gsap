@@ -1,6 +1,6 @@
 const App = () => {
   return (
-    <main className="bg-red-300 font-bold text-5xl font-circularWeb">
+    <main className="bg-red-300 font-bold text-5xl font-circularWeb text-violet-300">
       <h1>Welcome to Awwwards</h1>
     </main>
   );
