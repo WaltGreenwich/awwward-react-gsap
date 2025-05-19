@@ -1,7 +1,9 @@
+import Hero from "./components/Hero";
+
 const App = () => {
   return (
-    <main className="bg-red-300 font-bold text-5xl font-circularWeb text-violet-300">
-      <h1>Welcome to Awwwards</h1>
+    <main className="relative min-h-screen w-screen overflow-hidden">
+      <Hero />
     </main>
   );
 };
