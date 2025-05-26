@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@import "tailwindcss/preflight" @tailwind utilities;
+@import "tailwindcss/preflight";
+@tailwind utilities;
 
 body {
   font-family: "General Sans", sans-serif;
@@ -14,17 +15,15 @@ body {
   --font-circularWeb: "circular-web", sans-serif;
   --font-robertMedium: "robert-medium", sans-serif;
   --font-robertRegular: "robert-regular", sans-serif;
-  /* Blue palette */
+
   --color-blue-50: #dfdff0;
   --color-blue-75: #dfdff2;
   --color-blue-100: #f0f2fa;
   --color-blue-200: #010101;
   --color-blue-300: #4fb7dd;
 
-  /* Violet */
   --color-violet-300: #5724ff;
 
-  /* Yellow */
   --color-yellow-100: #8e983f;
   --color-yellow-300: #edff66;
 }
@@ -59,109 +58,276 @@ body {
   font-display: swap;
 }
 
-@layer utilities {
-  .border-hsla {
-    @apply border border-white/20;
-  }
+@utility border-hsla {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-  .nav-hover-btn {
-    @apply relative ms-10 font-general text-xs uppercase text-blue-50 after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white cursor-pointer;
-  }
+@utility nav-hover-btn {
+  position: relative;
+  margin-inline-start: 2.5rem;
+  font-family: var(--font-general);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--color-blue-50);
+  cursor: pointer;
+}
 
-  .floating-nav {
-    @apply bg-black rounded-lg border;
-  }
+nav-hover-btn::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: bottom right;
+  transform: scaleX(0);
+  background-color: #262626;
+  transition: transform 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
+}
 
-  .absolute-center {
-    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%];
-  }
+nav-hover-btn:hover::after {
+  transform-origin: bottom left;
+  transform: scaleX(1);
+}
 
-  .flex-center {
-    @apply flex justify-center items-center;
-  }
+@utility floating-nav {
+  background-color: black;
+  border-radius: 0.5rem;
+  border: 1px solid;
+}
 
-  .mask-clip-path {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
+@utility absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  .special-font b {
-    font-family: "Zentry";
-    font-feature-settings: "ss01" on;
-  }
+@utility flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+@utility mask-clip-path {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+@utility special-font-b {
+  font-family: "Zentry";
+  font-feature-settings: "ss01" on;
+}
+
+@utility hero-heading {
+  text-transform: uppercase;
+  font-family: var(--font-zentry);
+  font-weight: 900;
+  font-size: 3rem;
+}
+
+@screen sm {
   .hero-heading {
-    @apply uppercase font-zentry font-black text-5xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
+    right: 2.5rem;
+    font-size: 4rem;
   }
+}
+@screen md {
+  .hero-heading {
+    font-size: 6rem;
+  }
+}
+@screen lg {
+  .hero-heading {
+    font-size: 12rem;
+  }
+}
 
+@utility about-subtext {
+  position: absolute;
+  bottom: -80dvh;
+  left: 50%;
+  width: 100%;
+  max-width: 24rem;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: var(--font-circularWeb);
+  font-size: 1.125rem;
+}
+
+@screen md {
   .about-subtext {
-    @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem];
+    max-width: 34rem;
   }
+}
 
+@utility about-image {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 20;
+  height: 60vh;
+  width: 24rem;
+  transform: translateX(-50%);
+  overflow: hidden;
+  border-radius: 1.5rem;
+}
+
+@screen md {
   .about-image {
-    @apply absolute left-1/2 top-0 z-20 h-[60vh] w-96 origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[30vw];
+    width: 30vw;
   }
+}
 
+@utility animated-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 3rem;
+  text-transform: uppercase;
+  line-height: 0.8;
+  color: white;
+  padding-inline: 8rem;
+}
+
+@screen md {
   .animated-title {
-    @apply flex flex-col gap-1 text-7xl uppercase leading-[.8] text-white sm:px-32 md:text-[6rem];
+    font-size: 6rem;
   }
+}
 
-  .animated-word {
-    @apply special-font font-zentry font-black opacity-0;
-    transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
-    transform-origin: 50% 50% -150px !important;
-    will-change: opacity, transform;
-  }
+@utility animated-word {
+  font-family: var(--font-zentry);
+  font-weight: 900;
+  opacity: 0;
+  transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
+  transform-origin: 50% 50% -150px !important;
+  will-change: opacity, transform;
+}
 
-  .bento-tilt_1 {
-    @apply relative border-hsla col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out;
-  }
+@utility bento-tilt_1 {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  grid-column: span 2;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  transition: transform 0.3s ease-out;
+}
 
-  .bento-tilt_2 {
-    @apply relative col-span-1 row-span-1 overflow-hidden rounded-md transition-transform duration-300 ease-out;
-  }
+@utility bento-tilt_2 {
+  position: relative;
+  grid-column: span 1;
+  grid-row: span 1;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  transition: transform 0.3s ease-out;
+}
 
+@utility bento-title {
+  text-transform: uppercase;
+  font-size: 2.25rem;
+  font-weight: 900;
+  font-family: var(--font-zentry);
+}
+
+@screen md {
   .bento-title {
-    @apply uppercase md:text-6xl text-4xl font-black font-zentry;
+    font-size: 3.75rem;
   }
+}
 
+@utility story-img-container {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  filter: url("#flt_tag");
+}
+
+@screen md {
   .story-img-container {
-    @apply relative md:h-dvh h-[90vh] w-full;
-    filter: url("#flt_tag");
+    height: 100dvh;
   }
+}
 
+@utility story-img-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  clip-path: polygon(4% 0, 83% 21%, 100% 73%, 0% 100%);
+}
+
+@screen md {
   .story-img-mask {
-    @apply absolute left-0 top-0 size-full overflow-hidden md:left-[20%] md:top-[-10%] md:size-4/5;
-    clip-path: polygon(4% 0, 83% 21%, 100% 73%, 0% 100%);
+    left: 20%;
+    top: -10%;
+    height: 80%;
+    width: 80%;
   }
+}
 
+@utility story-img-content {
+  position: absolute;
+  width: 100%;
+  height: 50dvh;
+  opacity: 1;
+  left: 2.5rem;
+  top: 4rem;
+  transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+}
+
+@screen md {
   .story-img-content {
-    @apply absolute w-full md:h-dvh h-[50dvh] opacity-100 left-10 top-16 md:left-0 md:top-10 lg:left-[-300px] lg:top-[-100px];
-    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+    height: 100dvh;
+    left: 0;
+    top: 2.5rem;
   }
+}
 
-  .gallery-img-container {
-    @apply size-64 overflow-hidden bg-violet-300;
+@screen lg {
+  .story-img-content {
+    left: -18.75rem;
+    top: -6.25rem;
   }
+}
 
-  .gallery-img {
-    @apply size-full bg-cover;
-  }
+@utility gallery-img-container {
+  height: 16rem;
+  width: 16rem;
+  overflow: hidden;
+  background-color: var(--color-violet-300);
+}
 
+@utility gallery-img {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+}
+
+@utility gallery-img-4 {
+  border-radius: 0.5rem;
+  height: 24rem;
+  width: 25rem;
+}
+
+@screen sm {
   .gallery-img-4 {
-    @apply sm:size-80 md:h-96 md:w-[25rem] rounded-lg;
+    height: 20rem;
+    width: 20rem;
   }
+}
 
-  .sword-man-clip-path {
-    clip-path: polygon(16% 0, 89% 15%, 75% 100%, 0 97%);
-  }
+.sword-man-clip-path {
+  clip-path: polygon(16% 0, 89% 15%, 75% 100%, 0 97%);
+}
 
-  .contact-clip-path-1 {
-    clip-path: polygon(25% 0%, 74% 0, 69% 64%, 34% 73%);
-  }
+.contact-clip-path-1 {
+  clip-path: polygon(25% 0%, 74% 0, 69% 64%, 34% 73%);
+}
 
-  .contact-clip-path-2 {
-    clip-path: polygon(29% 15%, 85% 30%, 50% 100%, 10% 64%);
-  }
+.contact-clip-path-2 {
+  clip-path: polygon(29% 15%, 85% 30%, 50% 100%, 10% 64%);
 }
 
 .indicator-line {
